@@ -1,6 +1,6 @@
 {
   "dependencies": {
-    "firebase": "^11.7.1",
+    "firebase": "^11.10.0",
     "framer-motion": "^12.11.0",
     "lucide-react": "^0.510.0",
     "react-toastify": "^11.0.5"
