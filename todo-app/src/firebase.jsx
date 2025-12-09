@@ -1,22 +1,26 @@
-// Import Firebase functions
+// firebase.js
 import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 
-// Firebase configuration (NEW project)
+// Firebase config
 const firebaseConfig = {
-    apiKey: "AIzaSyCwD4dVH_onGUbH5Z6EIU2w6WG_FkukLa8",
-    authDomain: "todo-app-4a9ca.firebaseapp.com",
-    projectId: "todo-app-4a9ca",
-    storageBucket: "todo-app-4a9ca.firebasestorage.app",
-    messagingSenderId: "469051408516",
-    appId: "1:469051408516:web:528f7bee4b8bb94ac302d1"
+    apiKey: "AIzaSyDpHGkJKgJ_-kd6Bumx7stJMVCt_Vg_6Ag",
+    authDomain: "todo-app-72de8.firebaseapp.com",
+    projectId: "todo-app-72de8",
+    storageBucket: "todo-app-72de8.firebasestorage.app",
+    messagingSenderId: "396214122668",
+    appId: "1:396214122668:web:758e842e5dc112e6600709"
 };
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
-// Firebase services export
+// 🔐 Authentication
 export const auth = getAuth(app);
+
+// 🔵 Google Provider
 export const googleProvider = new GoogleAuthProvider();
+
+// 🗄️ Firestore Database
 export const db = getFirestore(app);
