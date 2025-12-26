@@ -2,8 +2,8 @@
 
 import { useState } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { createUserWithEmailAndPassword, GoogleAuthProvider, signInWithPopup } from "firebase/auth"
-import { auth, db } from "../firebase"
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth"
+import { auth, googleProvider, db } from "../firebase"
 import { doc, setDoc } from "firebase/firestore"
 import "./Signup.css"
 
@@ -74,8 +74,7 @@ export default function Signup() {
     setError("")
 
     try {
-      const provider = new GoogleAuthProvider()
-      const result = await signInWithPopup(auth, provider)
+      const result = await signInWithPopup(auth, googleProvider)
       const user = result.user
 
       await setDoc(doc(db, "users", user.uid), {
@@ -107,7 +106,11 @@ export default function Signup() {
             <h2 className="illustration-title">Ready to Take Control?</h2>
             <p className="illustration-subtitle">Join us today and build your personal task universe.</p>
             <div className="illustration-image-container">
-              <img src="https://img.lovepik.com/photo/45009/7682.jpg_wh860.jpg" alt="Signup illustration" className="illustration-image" />
+              <img
+                src="https://img.lovepik.com/photo/45009/7682.jpg_wh860.jpg"
+                alt="Signup illustration"
+                className="illustration-image"
+              />
             </div>
           </div>
         </div>

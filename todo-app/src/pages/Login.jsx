@@ -2,8 +2,8 @@
 
 import { useState, useEffect } from "react"
 import { Link, useNavigate } from "react-router-dom"
-import { signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signOut } from "firebase/auth"
-import { auth, db } from "../firebase"
+import { signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth"
+import { auth, db, googleProvider } from "../firebase"
 import { doc, getDoc, collection, query, where, getDocs } from "firebase/firestore"
 import "./Login.css"
 
@@ -72,8 +72,7 @@ export default function Login() {
     setError("")
 
     try {
-      const provider = new GoogleAuthProvider()
-      const result = await signInWithPopup(auth, provider)
+      const result = await signInWithPopup(auth, googleProvider)
       const user = result.user
 
       const userDocRef = doc(db, "users", user.uid)
@@ -87,9 +86,11 @@ export default function Login() {
       navigate("/home")
     } catch (error) {
       console.error("Google login error:", error)
-      setError(error.message.includes("not registered") 
-        ? "Account not registered. Please sign up first."
-        : "Google login failed. Please try again.")
+      setError(
+        error.message.includes("not registered")
+          ? "Account not registered. Please sign up first."
+          : "Google login failed. Please try again.",
+      )
     } finally {
       setLoading(false)
     }
@@ -109,7 +110,11 @@ export default function Login() {
             <h2 className="illustration-title">Welcome Back!</h2>
             <p className="illustration-subtitle">Log in to manage your tasks and stay organized.</p>
             <div className="illustration-image-container">
-              <img src="https://img.lovepik.com/photo/45009/7677.jpg_wh860.jpg" alt="Login illustration" className="illustration-image" />
+              <img
+                src="https://img.lovepik.com/photo/45009/7677.jpg_wh860.jpg"
+                alt="Login illustration"
+                className="illustration-image"
+              />
             </div>
           </div>
         </div>
